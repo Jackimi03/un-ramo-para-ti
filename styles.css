@@ -5,7 +5,7 @@
   --ink: #3d4438;
   --ink-soft: #6c6f5f;
   --gold: #e2bd3f;
-  --gold-deep: #a9781f;
+  --gold-deep: #8c641b;
   --green: #456e45;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -70,8 +70,7 @@ button:focus-visible {
 }
 
 .ambient,
-.ambient__wash,
-.ambient__grain {
+.ambient__wash {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -100,11 +99,6 @@ button:focus-visible {
 .ambient__wash--two {
   inset: auto -18vw -17vw auto;
   background: radial-gradient(circle, #809b69, transparent 68%);
-}
-
-.ambient__grain {
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
 }
 
 .opening {
@@ -467,7 +461,7 @@ button:focus-visible {
   font-size: clamp(1.15rem, 5vw, 1.65rem);
   font-weight: 400;
   letter-spacing: -0.018em;
-  line-height: 1.28;
+  line-height: 1.38;
   opacity: 0;
   transform: translateY(12px);
 }
@@ -479,6 +473,7 @@ button:focus-visible {
 .replay {
   border: 0;
   margin-top: 15px;
+  min-height: 44px;
   padding: 7px 9px;
   background: transparent;
   color: var(--ink-soft);
