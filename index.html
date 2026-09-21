@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#f7f3e9" />
+    <meta name="description" content="Un ramo de tulipanes y lirios amarillos que florece para ti." />
+    <meta property="og:title" content="Hice algo para ti..." />
+    <meta property="og:description" content="Un pequeño regalo que florece al abrirlo." />
+    <title>Flores para ti</title>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="experience" id="experience" data-state="idle">
+      <div class="ambient" aria-hidden="true">
+        <span class="ambient__wash ambient__wash--one"></span>
+        <span class="ambient__wash ambient__wash--two"></span>
+        <span class="ambient__grain"></span>
+      </div>
+
+      <button class="opening" id="start-gift" type="button" aria-label="Hacer florecer el ramo">
+        <span class="opening__copy">
+          <span class="opening__title">Hice algo para ti...</span>
+          <span class="opening__invitation">Toca aquí <span aria-hidden="true">🌷</span></span>
+          <span class="opening__pulse" aria-hidden="true"></span>
+        </span>
+      </button>
+
+      <section class="bouquet-stage" aria-label="Ramo de tulipanes y lirios amarillos">
+        <div class="bouquet-shell">
+          <div class="particles" aria-hidden="true">
+            <i class="light light--1"></i>
+            <i class="light light--2"></i>
+            <i class="light light--3"></i>
+            <i class="light light--4"></i>
+            <i class="light light--5"></i>
+            <i class="petal-fall petal-fall--1"></i>
+            <i class="petal-fall petal-fall--2"></i>
+            <i class="petal-fall petal-fall--3"></i>
+          </div>
+
+          <svg class="bouquet" viewBox="0 0 430 720" role="img" aria-labelledby="bouquet-title bouquet-desc">
+            <title id="bouquet-title">Ramo animado de flores amarillas</title>
+            <desc id="bouquet-desc">Tulipanes amarillos en forma de copa y lirios amarillos de seis pétalos florecen entre hojas verdes y un envoltorio color marfil.</desc>
+            <defs>
+              <linearGradient id="stemGreen" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#315c3b" />
+                <stop offset="0.54" stop-color="#5f8450" />
+                <stop offset="1" stop-color="#2f5938" />
+              </linearGradient>
+              <linearGradient id="leafGreen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#77915a" />
+                <stop offset="0.55" stop-color="#456e45" />
+                <stop offset="1" stop-color="#2f5639" />
+              </linearGradient>
+              <linearGradient id="tulipGold" x1="0.2" y1="0" x2="0.8" y2="1">
+                <stop offset="0" stop-color="#fff6a8" />
+                <stop offset="0.48" stop-color="#f4cf4e" />
+                <stop offset="1" stop-color="#dca72e" />
+              </linearGradient>
+              <linearGradient id="tulipLight" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fff9bf" />
+                <stop offset="1" stop-color="#ecc242" />
+              </linearGradient>
+              <linearGradient id="lilyGold" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0" stop-color="#fff9bf" />
+                <stop offset="0.62" stop-color="#f7d960" />
+                <stop offset="1" stop-color="#e0ad30" />
+              </linearGradient>
+              <linearGradient id="paperIvory" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fffdf5" />
+                <stop offset="0.58" stop-color="#eee4d1" />
+                <stop offset="1" stop-color="#d9cab3" />
+              </linearGradient>
+              <linearGradient id="paperWarm" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#d6c5a9" />
+                <stop offset="0.5" stop-color="#f6efe2" />
+                <stop offset="1" stop-color="#c8b697" />
+              </linearGradient>
+              <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+                <feDropShadow dx="0" dy="10" stdDeviation="9" flood-color="#77683d" flood-opacity="0.16" />
+              </filter>
+              <filter id="flowerShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#8f7127" flood-opacity="0.2" />
+              </filter>
+            </defs>
+
+            <g class="wrap" aria-hidden="true" filter="url(#softShadow)">
+              <path class="wrap__back" d="M84 405 C122 436 152 471 208 595 C255 474 302 437 347 405 L312 646 C278 672 145 672 112 646 Z" fill="url(#paperWarm)" />
+              <path class="wrap__left" d="M87 419 C122 480 147 535 205 611 L151 672 C125 621 103 528 87 419 Z" fill="url(#paperIvory)" />
+              <path class="wrap__right" d="M345 416 C311 482 284 538 209 611 L266 672 C296 615 326 522 345 416 Z" fill="url(#paperIvory)" />
+              <path class="wrap__crease" d="M151 672 L208 611 L266 672" fill="none" stroke="#bca98b" stroke-opacity="0.54" stroke-width="1.4" />
+              <path class="wrap__edge" d="M88 418 C143 451 170 495 208 595 C247 494 292 449 344 416" fill="none" stroke="#fffef9" stroke-opacity="0.9" stroke-width="3" />
+            </g>
+
+            <g class="living-bouquet">
+              <g class="stems" fill="none" stroke="url(#stemGreen)" stroke-linecap="round">
+                <path class="stem-line" pathLength="1" style="--delay:.15s" d="M210 634 C199 522 160 402 128 275" stroke-width="5.4" />
+                <path class="stem-line" pathLength="1" style="--delay:.28s" d="M211 635 C203 516 194 352 183 218" stroke-width="4.8" />
+                <path class="stem-line" pathLength="1" style="--delay:.42s" d="M213 636 C218 516 228 382 232 258" stroke-width="5.2" />
+                <path class="stem-line" pathLength="1" style="--delay:.56s" d="M214 635 C233 505 267 342 291 208" stroke-width="4.8" />
+                <path class="stem-line" pathLength="1" style="--delay:.68s" d="M216 635 C248 530 302 410 331 297" stroke-width="5.1" />
+                <path class="stem-line" pathLength="1" style="--delay:.8s" d="M208 634 C186 536 162 442 157 344" stroke-width="4.2" />
+                <path class="stem-line" pathLength="1" style="--delay:.92s" d="M216 635 C237 545 258 432 270 343" stroke-width="4.4" />
+                <path class="stem-line" pathLength="1" style="--delay:1.02s" d="M207 636 C171 526 126 451 105 369" stroke-width="4.4" />
+                <path class="stem-line" pathLength="1" style="--delay:1.12s" d="M214 635 C218 523 213 412 211 319" stroke-width="4.4" />
+                <path class="stem-line" pathLength="1" style="--delay:1.2s" d="M217 636 C263 539 304 445 322 360" stroke-width="4.5" />
+              </g>
+
+              <g class="leaves" aria-hidden="true">
+                <path class="leaf leaf--left" style="--delay:1.1s" d="M199 558 C155 538 132 506 126 471 C163 482 190 507 199 558 Z" />
+                <path class="leaf leaf--right" style="--delay:1.22s" d="M221 568 C256 532 286 519 314 521 C294 552 263 568 221 568 Z" />
+                <path class="leaf leaf--left" style="--delay:1.36s" d="M185 506 C145 484 127 450 125 419 C159 434 180 461 185 506 Z" />
+                <path class="leaf leaf--right" style="--delay:1.48s" d="M236 508 C262 467 292 445 321 439 C308 479 278 503 236 508 Z" />
+                <path class="leaf leaf--left" style="--delay:1.62s" d="M170 448 C135 428 115 399 111 370 C144 381 166 408 170 448 Z" />
+                <path class="leaf leaf--right" style="--delay:1.74s" d="M253 454 C275 416 300 397 328 391 C317 426 287 451 253 454 Z" />
+                <path class="leaf leaf--left leaf--slim" style="--delay:1.86s" d="M205 420 C179 389 172 353 181 326 C204 353 213 381 205 420 Z" />
+                <path class="leaf leaf--right leaf--slim" style="--delay:1.98s" d="M220 410 C231 368 252 340 278 328 C273 365 250 398 220 410 Z" />
+                <path class="leaf leaf--left leaf--small" style="--delay:2.08s" d="M151 393 C124 380 108 359 104 338 C131 344 148 363 151 393 Z" />
+                <path class="leaf leaf--right leaf--small" style="--delay:2.18s" d="M282 401 C299 373 319 359 340 357 C330 382 309 398 282 401 Z" />
+              </g>
+
+              <g transform="translate(128 277) rotate(-13) scale(.96)">
+                <g class="bloom bloom--tulip" style="--delay:2.35s">
+                  <path class="sepal" d="M-19 -5 L-31 -18 L-8 -13 L0 0 L9 -13 L31 -19 L20 -4 Z" />
+                  <path class="tulip-petal tulip-petal--left" d="M0 0 C-24 -2 -41 -24 -32 -53 C-17 -53 -4 -40 1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--right" d="M0 0 C24 -2 41 -24 32 -53 C17 -53 4 -40 -1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--center" d="M0 0 C-17 -12 -20 -42 0 -63 C20 -42 17 -12 0 0 Z" />
+                </g>
+              </g>
+              <g transform="translate(183 221) rotate(-5) scale(1.08)">
+                <g class="bloom bloom--tulip" style="--delay:2.66s">
+                  <path class="sepal" d="M-19 -5 L-31 -18 L-8 -13 L0 0 L9 -13 L31 -19 L20 -4 Z" />
+                  <path class="tulip-petal tulip-petal--left" d="M0 0 C-24 -2 -41 -24 -32 -53 C-17 -53 -4 -40 1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--right" d="M0 0 C24 -2 41 -24 32 -53 C17 -53 4 -40 -1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--center" d="M0 0 C-17 -12 -20 -42 0 -63 C20 -42 17 -12 0 0 Z" />
+                </g>
+              </g>
+              <g transform="translate(232 260) rotate(8) scale(.9)">
+                <g class="bloom bloom--tulip" style="--delay:2.92s">
+                  <path class="sepal" d="M-19 -5 L-31 -18 L-8 -13 L0 0 L9 -13 L31 -19 L20 -4 Z" />
+                  <path class="tulip-petal tulip-petal--left" d="M0 0 C-24 -2 -41 -24 -32 -53 C-17 -53 -4 -40 1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--right" d="M0 0 C24 -2 41 -24 32 -53 C17 -53 4 -40 -1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--center" d="M0 0 C-17 -12 -20 -42 0 -63 C20 -42 17 -12 0 0 Z" />
+                </g>
+              </g>
+              <g transform="translate(291 211) rotate(12) scale(1.04)">
+                <g class="bloom bloom--tulip" style="--delay:3.18s">
+                  <path class="sepal" d="M-19 -5 L-31 -18 L-8 -13 L0 0 L9 -13 L31 -19 L20 -4 Z" />
+                  <path class="tulip-petal tulip-petal--left" d="M0 0 C-24 -2 -41 -24 -32 -53 C-17 -53 -4 -40 1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--right" d="M0 0 C24 -2 41 -24 32 -53 C17 -53 4 -40 -1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--center" d="M0 0 C-17 -12 -20 -42 0 -63 C20 -42 17 -12 0 0 Z" />
+                </g>
+              </g>
+              <g transform="translate(331 299) rotate(17) scale(.88)">
+                <g class="bloom bloom--tulip" style="--delay:3.42s">
+                  <path class="sepal" d="M-19 -5 L-31 -18 L-8 -13 L0 0 L9 -13 L31 -19 L20 -4 Z" />
+                  <path class="tulip-petal tulip-petal--left" d="M0 0 C-24 -2 -41 -24 -32 -53 C-17 -53 -4 -40 1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--right" d="M0 0 C24 -2 41 -24 32 -53 C17 -53 4 -40 -1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--center" d="M0 0 C-17 -12 -20 -42 0 -63 C20 -42 17 -12 0 0 Z" />
+                </g>
+              </g>
+              <g transform="translate(157 346) rotate(-18) scale(.78)">
+                <g class="bloom bloom--tulip" style="--delay:3.62s">
+                  <path class="sepal" d="M-19 -5 L-31 -18 L-8 -13 L0 0 L9 -13 L31 -19 L20 -4 Z" />
+                  <path class="tulip-petal tulip-petal--left" d="M0 0 C-24 -2 -41 -24 -32 -53 C-17 -53 -4 -40 1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--right" d="M0 0 C24 -2 41 -24 32 -53 C17 -53 4 -40 -1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--center" d="M0 0 C-17 -12 -20 -42 0 -63 C20 -42 17 -12 0 0 Z" />
+                </g>
+              </g>
+              <g transform="translate(270 345) rotate(7) scale(.8)">
+                <g class="bloom bloom--tulip" style="--delay:3.82s">
+                  <path class="sepal" d="M-19 -5 L-31 -18 L-8 -13 L0 0 L9 -13 L31 -19 L20 -4 Z" />
+                  <path class="tulip-petal tulip-petal--left" d="M0 0 C-24 -2 -41 -24 -32 -53 C-17 -53 -4 -40 1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--right" d="M0 0 C24 -2 41 -24 32 -53 C17 -53 4 -40 -1 -18 Z" />
+                  <path class="tulip-petal tulip-petal--center" d="M0 0 C-17 -12 -20 -42 0 -63 C20 -42 17 -12 0 0 Z" />
+                </g>
+              </g>
+
+              <g transform="translate(105 369) rotate(-14) scale(.88)">
+                <g class="bloom bloom--lily" style="--delay:4.38s">
+                  <g class="lily-petals" filter="url(#flowerShadow)">
+                    <path class="lily-petal" style="--turn:0deg;--petal-delay:0s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:60deg;--petal-delay:.07s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:120deg;--petal-delay:.14s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:180deg;--petal-delay:.21s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:240deg;--petal-delay:.28s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:300deg;--petal-delay:.35s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                  </g>
+                  <g class="stamens">
+                    <path d="M0 0 L-28 -7 M0 0 L-19 -24 M0 0 L8 -28 M0 0 L27 -10 M0 0 L20 18" />
+                    <circle cx="-29" cy="-7" r="3.6" /><circle cx="-20" cy="-25" r="3.6" /><circle cx="8" cy="-29" r="3.6" /><circle cx="28" cy="-10" r="3.6" /><circle cx="21" cy="19" r="3.6" />
+                  </g>
+                  <circle class="lily-heart" r="7" />
+                  <g class="lily-speckles"><circle cx="-8" cy="-14" r="1.8" /><circle cx="8" cy="-12" r="1.5" /><circle cx="-2" cy="-20" r="1.6" /><circle cx="12" cy="5" r="1.4" /></g>
+                </g>
+              </g>
+
+              <g transform="translate(211 319) rotate(3) scale(.98)">
+                <g class="bloom bloom--lily" style="--delay:4.78s">
+                  <g class="lily-petals" filter="url(#flowerShadow)">
+                    <path class="lily-petal" style="--turn:0deg;--petal-delay:0s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:60deg;--petal-delay:.07s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:120deg;--petal-delay:.14s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:180deg;--petal-delay:.21s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:240deg;--petal-delay:.28s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:300deg;--petal-delay:.35s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                  </g>
+                  <g class="stamens">
+                    <path d="M0 0 L-28 -7 M0 0 L-19 -24 M0 0 L8 -28 M0 0 L27 -10 M0 0 L20 18" />
+                    <circle cx="-29" cy="-7" r="3.6" /><circle cx="-20" cy="-25" r="3.6" /><circle cx="8" cy="-29" r="3.6" /><circle cx="28" cy="-10" r="3.6" /><circle cx="21" cy="19" r="3.6" />
+                  </g>
+                  <circle class="lily-heart" r="7" />
+                  <g class="lily-speckles"><circle cx="-8" cy="-14" r="1.8" /><circle cx="8" cy="-12" r="1.5" /><circle cx="-2" cy="-20" r="1.6" /><circle cx="12" cy="5" r="1.4" /></g>
+                </g>
+              </g>
+
+              <g transform="translate(322 360) rotate(14) scale(.84)">
+                <g class="bloom bloom--lily" style="--delay:5.16s">
+                  <g class="lily-petals" filter="url(#flowerShadow)">
+                    <path class="lily-petal" style="--turn:0deg;--petal-delay:0s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:60deg;--petal-delay:.07s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:120deg;--petal-delay:.14s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:180deg;--petal-delay:.21s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:240deg;--petal-delay:.28s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                    <path class="lily-petal" style="--turn:300deg;--petal-delay:.35s" d="M0 2 C-10 -17 -7 -45 0 -66 C11 -42 12 -17 0 2 Z" />
+                  </g>
+                  <g class="stamens">
+                    <path d="M0 0 L-28 -7 M0 0 L-19 -24 M0 0 L8 -28 M0 0 L27 -10 M0 0 L20 18" />
+                    <circle cx="-29" cy="-7" r="3.6" /><circle cx="-20" cy="-25" r="3.6" /><circle cx="8" cy="-29" r="3.6" /><circle cx="28" cy="-10" r="3.6" /><circle cx="21" cy="19" r="3.6" />
+                  </g>
+                  <circle class="lily-heart" r="7" />
+                  <g class="lily-speckles"><circle cx="-8" cy="-14" r="1.8" /><circle cx="8" cy="-12" r="1.5" /><circle cx="-2" cy="-20" r="1.6" /><circle cx="12" cy="5" r="1.4" /></g>
+                </g>
+              </g>
+
+              <g class="green-details" aria-hidden="true">
+                <g class="sprig" style="--delay:5.72s" transform="translate(91 424) rotate(-34)">
+                  <path d="M0 54 C2 31 5 15 8 0" />
+                  <ellipse cx="0" cy="39" rx="8" ry="16" transform="rotate(-38 0 39)" />
+                  <ellipse cx="8" cy="25" rx="7" ry="14" transform="rotate(34 8 25)" />
+                  <ellipse cx="7" cy="10" rx="6" ry="12" transform="rotate(-31 7 10)" />
+                </g>
+                <g class="sprig" style="--delay:5.92s" transform="translate(344 437) rotate(29)">
+                  <path d="M0 54 C2 31 5 15 8 0" />
+                  <ellipse cx="0" cy="39" rx="8" ry="16" transform="rotate(-38 0 39)" />
+                  <ellipse cx="8" cy="25" rx="7" ry="14" transform="rotate(34 8 25)" />
+                  <ellipse cx="7" cy="10" rx="6" ry="12" transform="rotate(-31 7 10)" />
+                </g>
+              </g>
+            </g>
+
+            <g class="ribbon" aria-hidden="true" filter="url(#softShadow)">
+              <path class="ribbon__tail" d="M210 604 C181 627 167 663 163 705 L207 669 Z" fill="#d1b46e" />
+              <path class="ribbon__tail" d="M214 604 C245 628 258 665 262 705 L217 669 Z" fill="#c5a55d" />
+              <path class="ribbon__loop" d="M212 624 C178 591 146 594 151 624 C158 653 186 646 212 630 Z" fill="#ddc685" />
+              <path class="ribbon__loop" d="M212 624 C246 591 278 594 273 624 C266 653 238 646 212 630 Z" fill="#d0b46e" />
+              <ellipse cx="212" cy="626" rx="17" ry="14" fill="#b99243" />
+              <path d="M198 620 C206 625 218 625 227 619" fill="none" stroke="#f6e9bd" stroke-opacity="0.8" stroke-width="2" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="closing" aria-live="polite">
+          <p class="closing__message" id="final-message" aria-hidden="true">No podía darte estas flores en persona, así que hice que florecieran aquí para ti.</p>
+          <button class="replay" id="replay" type="button" aria-label="Ver florecer el ramo otra vez">Ver florecer otra vez <span aria-hidden="true">🌷</span></button>
+        </div>
+      </section>
+    </main>
+
+    <noscript>
+      <style>
+        .opening { display: none; }
+        .bouquet-stage { opacity: 1; visibility: visible; }
+        .closing__message { opacity: 1; transform: none; }
+        .replay { display: none; }
+      </style>
+    </noscript>
+    <script src="script.js" defer></script>
+  </body>
+</html>
