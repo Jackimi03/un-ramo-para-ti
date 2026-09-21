@@ -2,6 +2,8 @@
 
 Una experiencia web móvil y ligera: al tocar la pantalla, tallos, hojas, tulipanes amarillos y lirios amarillos florecen hasta formar un ramo envuelto en papel marfil.
 
+**Ver en vivo:** https://jackimi03.github.io/un-ramo-para-ti/
+
 ## Abrir localmente
 
 ```bash
