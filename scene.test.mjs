@@ -12,8 +12,8 @@ let completed=0;
 const {createBouquet}=await import('./bouquet3d.js');
 const scene=createBouquet(host,()=>completed++,message=>{throw Error(message);});
 assert.equal(scene.manifest.length,75);
-assert.equal(scene.manifest.filter(f=>f.kind==='tulip').length,50);
-assert.equal(scene.manifest.filter(f=>f.kind==='lily').length,25);
+assert.equal(scene.manifest.filter(f=>f.kind==='tulip').length,25);
+assert.equal(scene.manifest.filter(f=>f.kind==='lily').length,50);
 for(const sx of [-1,1])for(const sz of [-1,1])assert.ok(scene.manifest.filter(f=>f.position[0]*sx>0&&f.position[2]*sz>0).length>=15);
 scene.start();queue.shift()(performance.now()+700);
 assert.equal(completed,1);assert.equal(host.dataset.bloomed,'75');assert.equal(host.dataset.state,'interactive');
@@ -21,4 +21,4 @@ listeners.get('keydown')({key:'ArrowRight',preventDefault(){}});queue.shift()(pe
 assert.ok(Number(host.dataset.yaw)>.15);
 scene.start();queue.shift()(performance.now()+900);
 assert.equal(completed,2);assert.equal(host.dataset.yaw,'0.1500');assert.equal(host.dataset.zoom,'1.000');
-console.log('PASS: 50 tulips + 25 lilies; flowers in all four horizontal quadrants; reduced motion; keyboard rotation; replay resets camera and blooms.');
+console.log('PASS: 25 tulips + 50 lilies; flowers in all four horizontal quadrants; reduced motion; keyboard rotation; replay resets camera and blooms.');

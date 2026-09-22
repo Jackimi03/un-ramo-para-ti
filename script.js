@@ -9,6 +9,7 @@ let restarting = false;
 let loadPromise;
 
 function sceneFailure(message) {
+  sceneStatus.classList.remove('is-growing');
   sceneStatus.hidden = false;
   sceneStatus.textContent = message || 'No se pudo abrir el ramo 3D. Toca “Ver florecer otra vez” para reintentarlo.';
   experience.dataset.state = 'complete';
@@ -19,7 +20,7 @@ function sceneFailure(message) {
 
 function prepareScene() {
   if (!loadPromise) {
-    loadPromise = import('./bouquet3d.js?v=3d-5').then(({ createBouquet }) => {
+    loadPromise = import('./bouquet3d.js?v=harmony-1').then(({ createBouquet }) => {
       bouquet = createBouquet(host, completeExperience, sceneFailure);
       experience.classList.add('has-3d');
       return bouquet;
@@ -48,13 +49,14 @@ async function playExperience({ replaying = false } = {}) {
       await new Promise(resolve => setTimeout(resolve, 240));
     }
     sceneStatus.hidden = false;
-    sceneStatus.textContent = 'Preparando tus flores…';
+    sceneStatus.textContent = 'Esto todavía está floreciendo…';
+    sceneStatus.classList.add('is-growing');
     const scene = await prepareScene();
     experience.classList.remove('complete', 'playing', 'restarting');
     experience.dataset.state = 'playing';
     finalMessage.setAttribute('aria-hidden', 'true');
     experience.classList.add('playing');
-    sceneStatus.hidden = true;
+    sceneStatus.hidden = false;
     scene.start();
     restarting = false;
   } catch (error) {

@@ -509,6 +509,7 @@ button:focus-visible {
 .has-3d .bouquet-shell { width: min(100%, 780px); }
 .has-3d .particles { pointer-events: none; z-index: 1; }
 .scene-status { position: absolute; inset: 40% 20px auto; z-index: 5; padding: 16px; text-align: center; font-size: .95rem; color: var(--ink); background: var(--paper); }
+.scene-status.is-growing { inset: auto 12px 0; margin: 0; padding: 4px; background: transparent; font-size: .9rem; color: var(--ink-soft); pointer-events: none; }
 .scene-status[hidden] { display: none; }
 .restarting .bouquet-stage { opacity: 0 !important; transition: opacity 240ms var(--ease-out) !important; }
 .replay:disabled { pointer-events: none; }

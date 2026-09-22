@@ -1,6 +1,6 @@
 <!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prueba responsive del ramo</title>
 <style>body{margin:20px;background:#e7e4de;font:14px system-ui}nav{display:flex;gap:12px;margin-bottom:16px}iframe{display:block;border:1px solid #bbb;width:390px;height:844px;background:#faf7ef}button{padding:10px}output{display:block;margin:12px 0;max-width:640px}</style>
-<nav><button data-size="390,844">390 × 844</button><button data-size="320,568">320 × 568</button><button data-size="430,932">430 × 932</button><button id="pinch">Probar dos punteros</button></nav><output id="result">Vista de prueba; el enlace del regalo sigue siendo index.html.</output><iframe title="Experiencia móvil" src="./index.html?v=3d-5"></iframe>
+<nav><button data-size="390,844">390 × 844</button><button data-size="320,568">320 × 568</button><button data-size="430,932">430 × 932</button><button id="pinch">Probar dos punteros</button></nav><output id="result">Vista de prueba; el enlace del regalo sigue siendo index.html.</output><iframe title="Experiencia móvil" src="./index.html?v=harmony-1"></iframe>
 <script>
 const frame=document.querySelector('iframe'),result=document.querySelector('output');
 document.querySelectorAll('[data-size]').forEach(button=>button.onclick=()=>{const [w,h]=button.dataset.size.split(',');frame.style.width=w+'px';frame.style.height=h+'px';});

@@ -34,8 +34,8 @@ function surface(kind, rows = 16, cols = 10) {
         q = [u*w*.18, .83*t, .055*t];
       }
       opened.push(...p); closed.push(...q); uvs.push(j/cols,t);
-      const base = new THREE.Color(kind === 'leaf' ? '#35563b' : kind === 'lily' ? '#d5a21c' : '#d9a420');
-      const tip = new THREE.Color(kind === 'leaf' ? '#8fa46b' : '#ffe571');
+      const base = new THREE.Color(kind === 'leaf' ? '#35563b' : kind === 'lily' ? '#d5a21c' : '#d9c8a2');
+      const tip = new THREE.Color(kind === 'leaf' ? '#8fa46b' : kind === 'lily' ? '#ffe571' : '#fff3dd');
       base.lerp(tip, .2+.66*Math.sin(t*1.5));
       base.multiplyScalar(1-.1*Math.abs(u));
       colors.push(base.r,base.g,base.b);
@@ -64,14 +64,15 @@ function morphMaterial(kind, depth = false) {
   const material = depth ? new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking,side:THREE.DoubleSide}) : new THREE.MeshStandardMaterial({vertexColors:true,side:THREE.DoubleSide,roughness:kind==='leaf'?.65:.48,metalness:0});
   material.onBeforeCompile = shader => {
     shader.uniforms.uTime = clock;
-    shader.vertexShader = `attribute vec3 closedPosition; attribute vec3 closedNormal; attribute vec3 openNormal; attribute float aStart; attribute float aOpen; uniform float uTime; varying float vBorn; varying vec2 vPetalUv;\n` + shader.vertexShader;
+    shader.vertexShader = `attribute vec3 closedPosition; attribute vec3 closedNormal; attribute vec3 openNormal; attribute float aStart; attribute float aOpen; attribute float aRoughness; varying float vRoughness; uniform float uTime; varying float vBorn; varying vec2 vPetalUv;\n` + shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace('#include <beginnormal_vertex>', `float bloom = clamp((uTime-aStart)/2.65,0.0,1.0); bloom = (1.0-pow(1.0-bloom,3.0))*aOpen; vec3 objectNormal = normalize(mix(closedNormal,openNormal,bloom));`);
-    shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `float bud = smoothstep(aStart-0.8,aStart-0.2,uTime); vec3 transformed = mix(closedPosition,position,bloom)*mix(0.15,1.0,bud); vBorn=bud; vPetalUv=uv;`);
+    shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `float bud = smoothstep(aStart-0.8,aStart-0.2,uTime); vec3 transformed = mix(closedPosition,position,bloom)*mix(0.15,1.0,bud); vBorn=bud; vPetalUv=uv; vRoughness=aRoughness;`);
     // Depth shaders do not run the normal chunk, so define the interpolation here.
     if (depth) shader.vertexShader = shader.vertexShader.replace('float bud =', 'float bloom = clamp((uTime-aStart)/2.65,0.0,1.0); bloom=(1.0-pow(1.0-bloom,3.0))*aOpen; float bud =');
-    shader.fragmentShader = 'varying float vBorn; varying vec2 vPetalUv;\n' + shader.fragmentShader;
+    shader.fragmentShader = 'varying float vRoughness; varying float vBorn; varying vec2 vPetalUv;\n' + shader.fragmentShader;
     shader.fragmentShader = shader.fragmentShader.replace('#include <clipping_planes_fragment>', '#include <clipping_planes_fragment>\nif(vBorn<0.002) discard;');
     if (!depth) {
+      shader.fragmentShader=shader.fragmentShader.replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor=vRoughness;');
       const spots = kind==='lily' ? `vec2 cell=floor(vPetalUv*vec2(19.0,29.0)); float hash=fract(sin(dot(cell,vec2(12.9898,78.233)))*43758.5453); float spot=step(0.84,hash)*(1.0-smoothstep(0.13,0.23,length(fract(vPetalUv*vec2(19.0,29.0))-.5)))*(1.0-smoothstep(.2,.53,vPetalUv.y)); diffuseColor.rgb*=1.0-spot*.46;` : '';
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>\nfloat vein=pow(0.5+0.5*cos(vPetalUv.x*94.0+sin(vPetalUv.y*8.0)),9.0); diffuseColor.rgb*=1.0-.045*vein; ${spots}`);
     }
@@ -82,13 +83,14 @@ function morphMaterial(kind, depth = false) {
 
 function instances(geometry, material, records, root, morphKind) {
   const mesh=new THREE.InstancedMesh(geometry,material,records.length);
-  const starts=[], opens=[];
+  const starts=[], opens=[], roughnesses=[];
   records.forEach((r,i)=>{
     mesh.setMatrixAt(i,r.matrix);
     if(r.color) mesh.setColorAt(i,r.color);
-    starts.push(r.start||0); opens.push(r.open??1);
+    starts.push(r.start||0); opens.push(r.open??1); roughnesses.push(r.roughness??.65);
   });
   if(morphKind) {
+    geometry.setAttribute('aRoughness',new THREE.InstancedBufferAttribute(new Float32Array(roughnesses),1));
     geometry.setAttribute('aStart',new THREE.InstancedBufferAttribute(new Float32Array(starts),1));
     geometry.setAttribute('aOpen',new THREE.InstancedBufferAttribute(new Float32Array(opens),1));
     mesh.customDepthMaterial=morphMaterial(morphKind,true);
@@ -113,7 +115,7 @@ export function createBouquet(host, onComplete, onFailure) {
   renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.shadowMap.autoUpdate=false;
   const canvas=renderer.domElement;
-  canvas.setAttribute('aria-label','Ramo tridimensional de 50 tulipanes amarillos y 25 lirios amarillos. Arrastra para girar; usa dos dedos para acercar. Con teclado, flechas para girar y signos más o menos para acercar.');
+  canvas.setAttribute('aria-label','Ramo tridimensional de 50 lirios amarillos y 25 tulipanes marfil. Arrastra para girar; usa dos dedos para acercar. Con teclado, flechas para girar y signos más o menos para acercar.');
   canvas.setAttribute('role','img'); canvas.tabIndex=-1;
   host.append(canvas);
   const scene=new THREE.Scene(), root=new THREE.Group(); scene.add(root);
@@ -136,7 +138,7 @@ export function createBouquet(host, onComplete, onFailure) {
   const stemMaterial=new THREE.MeshStandardMaterial({color:'#496839',roughness:.8});
   seed=7549;
   for(let i=0;i<75;i++) {
-    const kind=i%3===0?'lily':'tulip';
+    const kind=i%3===0?'tulip':'lily';
     const a=i*Math.PI*(3-Math.sqrt(5))+(random()-.5)*.24;
     const h=1-(i+.5)/75*1.38;
     const radius=(2.05+(random()-.5)*.23)*Math.sqrt(1-h*h);
@@ -146,14 +148,17 @@ export function createBouquet(host, onComplete, onFailure) {
     const size=(kind==='lily'?.77:.78)+random()*.16;
     const start=kind==='lily'?6+i*.01+random()*1.5:3.95+i*.018+random()*.9;
     const openness=kind==='lily'?.91+random()*.09:.54+random()*.46;
+    const tone=(i*.61803398875)%1;
+    const roughness=kind==='lily'?.43+tone*.22:.58+tone*.1;
     const flower={kind,position:pos.toArray(),start,open:openness}; flowerData.push(flower);
     const parent=matrix(pos,q,[size,size,size]);
     for(let p=0;p<6;p++) {
       const angle=p*TAU/6+(p%2?.06:0);
       dummy.position.set(0,p%2?.025:0,0); dummy.rotation.set(0,angle,0);
       dummy.scale.setScalar(p%2?.93:1); dummy.updateMatrix();
-      const tint=new THREE.Color().setRGB(1,.94+random()*.06,.77+random()*.23);
-      (kind==='lily'?lilyRecords:tulipRecords).push({matrix:parent.clone().multiply(dummy.matrix),start:start+p*.04,open:openness,color:tint});
+      const tintA=random(), tintB=random();
+      const tint=kind==='tulip'?new THREE.Color().setRGB(1,.975+tone*.015+tintA*.01,.91+tone*.06+tintB*.03):new THREE.Color().setRGB(1,.88+tone*.1+tintA*.02,.7+tone*.22+tintB*.08);
+      (kind==='lily'?lilyRecords:tulipRecords).push({matrix:parent.clone().multiply(dummy.matrix),start:start+p*.04,open:openness,color:tint,roughness});
     }
     const base=new THREE.Vector3(Math.cos(a)*.18,-2.17+random()*.15,Math.sin(a)*.18);
     const curve=new THREE.CubicBezierCurve3(base,new THREE.Vector3(base.x*.6,-.9,base.z*.6),new THREE.Vector3(pos.x*.67,pos.y-.45,pos.z*.67),pos);
