@@ -1,4 +1,5 @@
 import * as THREE from './vendor/three.module.min.js';
+import { CanvasBouquetRenderer } from './canvas3d.js';
 
 const TAU = Math.PI * 2;
 const UP = new THREE.Vector3(0, 1, 0);
@@ -101,7 +102,10 @@ function matrix(position, quaternion, scale) {
 }
 
 export function createBouquet(host, onComplete, onFailure) {
-  const renderer = new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'});
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'}); }
+  catch { renderer = new CanvasBouquetRenderer(clock); }
+  host.dataset.renderer=renderer.software?'canvas-3d':'webgl';
   renderer.setClearColor(0x000000,0);
   renderer.setPixelRatio(Math.min(devicePixelRatio,matchMedia('(pointer:coarse)').matches?1.5:1.8));
   renderer.outputColorSpace=THREE.SRGBColorSpace;
@@ -173,8 +177,8 @@ export function createBouquet(host, onComplete, onFailure) {
       anthers.push({matrix:parent.clone().multiply(matrix(end,aq,[.035,.07,.026])),start});
     }
   }
-  const tulipMesh=instances(surface('tulip'),morphMaterial('tulip'),tulipRecords,root,'tulip');
-  const lilyMesh=instances(surface('lily'),morphMaterial('lily'),lilyRecords,root,'lily');
+  const tulipMesh=instances(surface('tulip',renderer.software?10:16,renderer.software?6:10),morphMaterial('tulip'),tulipRecords,root,'tulip');
+  const lilyMesh=instances(surface('lily',renderer.software?10:16,renderer.software?6:10),morphMaterial('lily'),lilyRecords,root,'lily');
   instances(surface('leaf',10,6),morphMaterial('leaf'),leafRecords,root,'leaf');
   const stemGeometry=new THREE.BufferGeometry();stemGeometry.setIndex(stemIndices);
   stemGeometry.setAttribute('position',new THREE.Float32BufferAttribute(stemPositions,3));
@@ -251,7 +255,7 @@ export function createBouquet(host, onComplete, onFailure) {
     host.dataset.elapsed=elapsed.toFixed(2);host.dataset.drawCalls=String(renderer.info.render.calls);
   }
   function frame(now) {
-    raf=0;const dt=Math.min((now-last)/1000||0,.05);last=now;
+    raf=0;const dt=Math.min((now-last)/1000||0,.15);last=now;
     if(document.hidden)return;
     if(mode==='growing') {
       elapsed+=dt;
