@@ -34,9 +34,9 @@ function surface(kind, rows = 16, cols = 10) {
         q = [u*w*.18, .83*t, .055*t];
       }
       opened.push(...p); closed.push(...q); uvs.push(j/cols,t);
-      const base = new THREE.Color(kind === 'leaf' ? '#35563b' : kind === 'lily' ? '#d5a21c' : '#d9c8a2');
-      const tip = new THREE.Color(kind === 'leaf' ? '#8fa46b' : kind === 'lily' ? '#ffe571' : '#fff3dd');
-      base.lerp(tip, .2+.66*Math.sin(t*1.5));
+      const base = new THREE.Color(kind === 'leaf' ? '#35563b' : kind === 'lily' ? '#d5a21c' : '#f6ebe7');
+      const tip = new THREE.Color(kind === 'leaf' ? '#8fa46b' : kind === 'lily' ? '#ffe571' : '#bc7d88');
+      base.lerp(tip, kind==='tulip'?smooth(-.08,.92,t):.2+.66*Math.sin(t*1.5));
       base.multiplyScalar(1-.1*Math.abs(u));
       colors.push(base.r,base.g,base.b);
       if (i < rows && j < cols) {
@@ -161,7 +161,7 @@ export function createBouquet(host, onComplete, onFailure) {
       dummy.position.set(0,p%2?.025:0,0); dummy.rotation.set(0,angle,0);
       dummy.scale.setScalar(p%2?.93:1); dummy.updateMatrix();
       const tintA=random(), tintB=random();
-      const tint=kind==='tulip'?new THREE.Color().setRGB(.985+tintA*.015,.94+tone*.045+tintA*.01,.87+tone*.07+tintB*.035):new THREE.Color().setRGB(1,.88+tone*.1+tintA*.02,.7+tone*.22+tintB*.08);
+      const tint=kind==='tulip'?new THREE.Color().setRGB(.975+tintA*.02,.96+tone*.018+tintA*.012,.965+tone*.015+tintB*.015):new THREE.Color().setRGB(1,.88+tone*.1+tintA*.02,.7+tone*.22+tintB*.08);
       (kind==='lily'?lilyRecords:tulipRecords).push({matrix:parent.clone().multiply(dummy.matrix),start:start+p*.04,open:openness,color:tint,roughness});
     }
     const base=new THREE.Vector3(Math.cos(a)*.18,-2.17+random()*.15,Math.sin(a)*.18);
