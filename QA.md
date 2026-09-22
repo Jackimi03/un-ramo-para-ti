@@ -12,9 +12,10 @@ Se aplicaron Impeccable, Emil design engineering/animate/review-animations, mobi
 ## Comprobaciones
 
 - En navegador: inicio por el botón original; estado final con 75/75 flores abiertas; 50 tulipanes y 25 lirios derivados del manifiesto real.
-- Arrastre hasta la cara posterior: otras flores y envoltorio visibles, no una fachada plana. Inclinación vertical comprobada.
+- Arrastre hasta la cara posterior: otras flores y envoltorio visibles, no una fachada plana. Inclinación vertical comprobada. En la versión final, yaw 10.6805 rad (>360°) y pitch 2.1000 rad.
 - Vistas responsive de 390×844 y 320×568, con mensaje y repetición legibles.
 - Pinch de dos punteros sintéticos: zoom de 1 a 0.667. No equivale a probar hardware táctil físico.
+- Repetición completa en navegador: 75 → 0 → 75 flores, con cámara restablecida a yaw 0.1500, pitch 1.2900 y zoom 1.000.
 - `node scene.test.mjs`: cantidades exactas, al menos 15 flores por cuadrante horizontal, modo de movimiento reducido, giro por teclado y reinicio de cámara/floración.
 - Sin dependencias de red para las flores: Three.js se sirve junto al proyecto. Recursos principales aproximadamente 197 kB comprimidos con gzip; no es una medición de transferencia de un teléfono.
 
