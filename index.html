@@ -9,7 +9,7 @@
     <meta property="og:description" content="Un pequeño regalo que florece al abrirlo." />
     <title>Flores para ti</title>
     <script>document.documentElement.classList.add('js');</script>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=3d-1" />
   </head>
   <body>
     <main class="experience" id="experience" data-state="idle">
@@ -28,6 +28,8 @@
 
       <section class="bouquet-stage" aria-label="Ramo de tulipanes y lirios amarillos">
         <div class="bouquet-shell">
+          <div id="bouquet-3d" class="bouquet-3d"></div>
+          <p id="scene-status" class="scene-status" role="status" hidden></p>
           <div class="particles" aria-hidden="true">
             <i class="light light--1"></i>
             <i class="light light--2"></i>
@@ -276,6 +278,6 @@
         .replay { display: none; }
       </style>
     </noscript>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=3d-1" defer></script>
   </body>
 </html>
