@@ -144,7 +144,7 @@ export function createBouquet(host, onComplete, onFailure) {
     const dir=new THREE.Vector3(pos.x*(kind==='lily'?.68:.32),.7+h*.8,pos.z*(kind==='lily'?.68:.32)).normalize();
     const q=new THREE.Quaternion().setFromUnitVectors(UP,dir);
     const size=(kind==='lily'?.77:.78)+random()*.16;
-    const start=(kind==='lily'?5.7:3.05)+random()*2.15;
+    const start=kind==='lily'?6+i*.01+random()*1.5:3.95+i*.018+random()*.9;
     const openness=kind==='lily'?.91+random()*.09:.54+random()*.46;
     const flower={kind,position:pos.toArray(),start,open:openness}; flowerData.push(flower);
     const parent=matrix(pos,q,[size,size,size]);
@@ -166,7 +166,7 @@ export function createBouquet(host, onComplete, onFailure) {
       const t=.47+l*.18, lp=curve.getPoint(t);
       const ld=new THREE.Vector3(Math.cos(a+(l?.5:-.5))*.85,.6,Math.sin(a+(l?.5:-.5))*.85).normalize();
       const lq=new THREE.Quaternion().setFromUnitVectors(UP,ld);
-      leafRecords.push({matrix:matrix(lp,lq,[.75,1.05+random()*.45,1.1]),start:2.1+l*.5+i*.018+random()*.25,open:1});
+      leafRecords.push({matrix:matrix(lp,lq,[.75,1.05+random()*.45,1.1]),start:2.45+l*.52+i*.018+random()*.25,open:1});
     }
     if(kind==='lily') for(let j=0;j<6;j++) {
       const ang=j*TAU/6;
