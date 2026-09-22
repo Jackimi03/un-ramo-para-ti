@@ -57,7 +57,7 @@ export class CanvasBouquetRenderer {
     });
     faces.sort((a,b)=>b.z-a.z);
     ctx.lineWidth=.55;ctx.lineJoin='round';
-    for(const f of faces){ctx.fillStyle=ctx.strokeStyle=f.color;ctx.beginPath();ctx.moveTo(f.pa[0],f.pa[1]);ctx.lineTo(f.pb[0],f.pb[1]);if(f.pd)ctx.lineTo(f.pd[0],f.pd[1]);ctx.lineTo(f.pc[0],f.pc[1]);ctx.closePath();ctx.fill();}
+    for(const f of faces){ctx.fillStyle=ctx.strokeStyle=f.color;ctx.beginPath();ctx.moveTo(f.pa[0],f.pa[1]);ctx.lineTo(f.pb[0],f.pb[1]);if(f.pd)ctx.lineTo(f.pd[0],f.pd[1]);ctx.lineTo(f.pc[0],f.pc[1]);ctx.closePath();ctx.fill();ctx.stroke();}
     this.info.render.calls=calls;
   }
 }

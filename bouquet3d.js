@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three.module.min.js';
-import { CanvasBouquetRenderer } from './canvas3d.js?v=3d-3';
+import { CanvasBouquetRenderer } from './canvas3d.js?v=3d-4';
 
 const TAU = Math.PI * 2;
 const UP = new THREE.Vector3(0, 1, 0);
@@ -274,7 +274,7 @@ export function createBouquet(host, onComplete, onFailure) {
     if(mode==='growing'||Math.abs(velocityX)+Math.abs(velocityY)>.00005)request(false);
   }
   function request(wake=true){if(!raf&&!document.hidden){if(wake)last=performance.now();raf=requestAnimationFrame(frame);}}
-  function resize(){const r=host.getBoundingClientRect();if(!r.width||!r.height)return;camera.aspect=r.width/r.height;camera.updateProjectionMatrix();baseDistance=Math.max(3.35/Math.tan(Math.PI*.1),3.15/(Math.tan(Math.PI*.1)*camera.aspect))*1.06;renderer.setSize(r.width,r.height,false);request();}
+  function resize(){const r=host.getBoundingClientRect();if(!r.width||!r.height)return;camera.aspect=r.width/r.height;camera.updateProjectionMatrix();baseDistance=Math.max(3.35/Math.tan(Math.PI*.1),2.98/(Math.tan(Math.PI*.1)*camera.aspect))*1.02;renderer.setSize(r.width,r.height,false);request();}
   const observer=new ResizeObserver(resize);observer.observe(host);
   function pairDistance(){const [a,b]=Array.from(pointers.values());return a&&b?Math.hypot(a.x-b.x,a.y-b.y):0;}
   canvas.addEventListener('pointerdown',event=>{
