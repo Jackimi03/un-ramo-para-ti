@@ -137,6 +137,7 @@ export function createBouquet(host, onComplete, onFailure) {
   const filamentMaterial=new THREE.MeshStandardMaterial({color:'#d1bb66',roughness:.52});
   const stemMaterial=new THREE.MeshStandardMaterial({color:'#496839',roughness:.8});
   seed=7549;
+  let tulipIndex=0;
   for(let i=0;i<75;i++) {
     const kind=i%3===0?'tulip':'lily';
     const a=i*Math.PI*(3-Math.sqrt(5))+(random()-.5)*.24;
@@ -147,7 +148,10 @@ export function createBouquet(host, onComplete, onFailure) {
     const q=new THREE.Quaternion().setFromUnitVectors(UP,dir);
     const size=(kind==='lily'?.77:.78)+random()*.16;
     const start=kind==='lily'?6+i*.01+random()*1.5:3.95+i*.018+random()*.9;
-    const openness=kind==='lily'?.91+random()*.09:.54+random()*.46;
+    const openingVariation=random();
+    const tulipState=kind==='tulip'?(tulipIndex*9)%25:-1;
+    const openness=kind==='lily'?.91+openingVariation*.09:tulipState<9?.08+openingVariation*.14:tulipState<20?.36+openingVariation*.2:.72+openingVariation*.14;
+    if(kind==='tulip')tulipIndex++;
     const tone=(i*.61803398875)%1;
     const roughness=kind==='lily'?.43+tone*.22:.58+tone*.1;
     const flower={kind,position:pos.toArray(),start,open:openness}; flowerData.push(flower);
@@ -157,7 +161,7 @@ export function createBouquet(host, onComplete, onFailure) {
       dummy.position.set(0,p%2?.025:0,0); dummy.rotation.set(0,angle,0);
       dummy.scale.setScalar(p%2?.93:1); dummy.updateMatrix();
       const tintA=random(), tintB=random();
-      const tint=kind==='tulip'?new THREE.Color().setRGB(1,.975+tone*.015+tintA*.01,.91+tone*.06+tintB*.03):new THREE.Color().setRGB(1,.88+tone*.1+tintA*.02,.7+tone*.22+tintB*.08);
+      const tint=kind==='tulip'?new THREE.Color().setRGB(.985+tintA*.015,.94+tone*.045+tintA*.01,.87+tone*.07+tintB*.035):new THREE.Color().setRGB(1,.88+tone*.1+tintA*.02,.7+tone*.22+tintB*.08);
       (kind==='lily'?lilyRecords:tulipRecords).push({matrix:parent.clone().multiply(dummy.matrix),start:start+p*.04,open:openness,color:tint,roughness});
     }
     const base=new THREE.Vector3(Math.cos(a)*.18,-2.17+random()*.15,Math.sin(a)*.18);
