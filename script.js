@@ -19,7 +19,7 @@ function sceneFailure(message) {
 
 function prepareScene() {
   if (!loadPromise) {
-    loadPromise = import('./bouquet3d.js?v=3d-2').then(({ createBouquet }) => {
+    loadPromise = import('./bouquet3d.js?v=3d-3').then(({ createBouquet }) => {
       bouquet = createBouquet(host, completeExperience, sceneFailure);
       experience.classList.add('has-3d');
       return bouquet;

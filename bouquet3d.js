@@ -1,5 +1,5 @@
 import * as THREE from './vendor/three.module.min.js';
-import { CanvasBouquetRenderer } from './canvas3d.js';
+import { CanvasBouquetRenderer } from './canvas3d.js?v=3d-3';
 
 const TAU = Math.PI * 2;
 const UP = new THREE.Vector3(0, 1, 0);
@@ -166,7 +166,7 @@ export function createBouquet(host, onComplete, onFailure) {
       const t=.47+l*.18, lp=curve.getPoint(t);
       const ld=new THREE.Vector3(Math.cos(a+(l?.5:-.5))*.85,.6,Math.sin(a+(l?.5:-.5))*.85).normalize();
       const lq=new THREE.Quaternion().setFromUnitVectors(UP,ld);
-      leafRecords.push({matrix:matrix(lp,lq,[.75,1.05+random()*.45,1.1]),start:1.6+random()*1.9,open:1});
+      leafRecords.push({matrix:matrix(lp,lq,[.75,1.05+random()*.45,1.1]),start:2.1+l*.5+i*.018+random()*.25,open:1});
     }
     if(kind==='lily') for(let j=0;j<6;j++) {
       const ang=j*TAU/6;
@@ -255,7 +255,7 @@ export function createBouquet(host, onComplete, onFailure) {
     host.dataset.elapsed=elapsed.toFixed(2);host.dataset.drawCalls=String(renderer.info.render.calls);
   }
   function frame(now) {
-    raf=0;const dt=Math.min((now-last)/1000||0,.15);last=now;
+    raf=0;const dt=Math.min((now-last)/1000||0,1);last=now;
     if(document.hidden)return;
     if(mode==='growing') {
       elapsed+=dt;

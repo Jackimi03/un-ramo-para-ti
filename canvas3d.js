@@ -9,7 +9,7 @@ export class CanvasBouquetRenderer {
     this.v=new THREE.Vector3();this.n=new THREE.Vector3();this.tint=new THREE.Color();
     this.key=new THREE.Vector3(-3,7,5).normalize();this.fill=new THREE.Vector3(4,3,-5).normalize();
   }
-  setClearColor(){} setPixelRatio(n){this.ratio=Math.min(n,1.3);}
+  setClearColor(){} setPixelRatio(n){this.ratio=1;}
   setSize(w,h){this.w=w;this.h=h;this.domElement.width=Math.round(w*this.ratio);this.domElement.height=Math.round(h*this.ratio);}
   dispose(){}
   render(scene,camera) {
@@ -50,13 +50,14 @@ export class CanvasBouquetRenderer {
           const light=.49+.53*Math.abs(this.n.dot(this.key))+.17*Math.max(0,this.n.dot(this.fill));
           const ca=colors[ia],cb=colors[ib],cc=colors[ic];
           const channel=i=>Math.round(255*Math.pow(Math.min(1,((ca[i]+cb[i]+cc[i])/3)*light),1/2.2));
-          faces.push({pa,pb,pc,z:(pa[2]+pb[2]+pc[2])/3,color:`rgb(${channel(0)},${channel(1)},${channel(2)})`});
+          let pd=null;if(idx[j+3]===ib&&idx[j+5]===ic){pd=vertices[idx[j+4]];j+=3;}
+          faces.push({pa,pb,pc,pd,z:(pa[2]+pb[2]+pc[2])/3,color:`rgb(${channel(0)},${channel(1)},${channel(2)})`});
         }
       }
     });
     faces.sort((a,b)=>b.z-a.z);
     ctx.lineWidth=.55;ctx.lineJoin='round';
-    for(const f of faces){ctx.fillStyle=ctx.strokeStyle=f.color;ctx.beginPath();ctx.moveTo(f.pa[0],f.pa[1]);ctx.lineTo(f.pb[0],f.pb[1]);ctx.lineTo(f.pc[0],f.pc[1]);ctx.closePath();ctx.fill();ctx.stroke();}
+    for(const f of faces){ctx.fillStyle=ctx.strokeStyle=f.color;ctx.beginPath();ctx.moveTo(f.pa[0],f.pa[1]);ctx.lineTo(f.pb[0],f.pb[1]);if(f.pd)ctx.lineTo(f.pd[0],f.pd[1]);ctx.lineTo(f.pc[0],f.pc[1]);ctx.closePath();ctx.fill();}
     this.info.render.calls=calls;
   }
 }
